@@ -53,6 +53,10 @@ type resolver struct {
 	users []*User
 }
 
+func (r *resolver) Mutation() MutationResolver {
+	return &mutationResolver{r}
+}
+
 func (r *resolver) Query() QueryResolver {
 	return &queryResolver{r}
 }
@@ -69,6 +73,19 @@ func (r *queryResolver) Me(ctx context.Context) (*User, error) {
 
 func (r *queryResolver) AllUsers(ctx context.Context) ([]*User, error) {
 	return r.users, nil
+}
+
+type mutationResolver struct{ *resolver }
+
+func (r *mutationResolver) CreateUser(ctx context.Context, input *NewUser) (*User, error) {
+	user := &User{
+		ID:       input.ID,
+		Name:     &input.Name,
+		Username: &input.Username,
+		Email:    &input.Email,
+	}
+	r.users = append(r.users, user)
+	return user, nil
 }
 
 type entityResolver struct{ *resolver }
