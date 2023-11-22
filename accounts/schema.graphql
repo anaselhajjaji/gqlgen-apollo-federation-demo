@@ -5,8 +5,20 @@ extend type Query {
   allUsers: [User]
 }
 
+input NewUser {
+  id: ID!
+  name: String!
+  username: String!
+  email: String!
+}
+
+type Mutation {
+  createUser(input: NewUser): User!
+}
+
 type User @key(fields: "id") {
   id: ID!
   name: String
   username: String
+  email: String
 }
