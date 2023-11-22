@@ -19,26 +19,31 @@ func NewResolver() ResolverRoot {
 				ID:       "1",
 				Name:     ptrString("Jad"),
 				Username: ptrString("@jad"),
+				Email:    ptrString("jad@email.com"),
 			},
 			{
 				ID:       "2",
 				Name:     ptrString("Marouan"),
 				Username: ptrString("@marouan"),
+				Email:    ptrString("marouan@email.com"),
 			},
 			{
 				ID:       "3",
 				Name:     ptrString("Anas"),
-				Username: ptrString("@anaselhajjaji"),
+				Username: ptrString("@anas"),
+				Email:    ptrString("anas@email.com"),
 			},
 			{
 				ID:       "4",
 				Name:     ptrString("Chaymae"),
 				Username: ptrString("@chaymae"),
+				Email:    ptrString("chaymae@email.com"),
 			},
 			{
 				ID:       "5",
 				Name:     ptrString("Adam"),
 				Username: ptrString("@adam"),
+				Email:    ptrString("adam@email.com"),
 			},
 		},
 	}
