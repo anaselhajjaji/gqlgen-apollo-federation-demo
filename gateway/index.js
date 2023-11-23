@@ -1,5 +1,6 @@
 const { ApolloServer } = require("apollo-server");
 const { ApolloGateway } = require("@apollo/gateway");
+const {serializeQueryPlan} = require('@apollo/query-planner');
 
 const accountsHost = process.env["ACCOUNTS_HOST"] || "localhost:4001";
 const reviewsHost = process.env["REVIEWS_HOST"] || "localhost:4002";
@@ -13,6 +14,11 @@ const gateway = new ApolloGateway({
     { name: "products", url: `http://${productsHost}/graphql` },
     { name: "inventory", url: `http://${inventoryHost}/graphql` },
   ],
+  experimental_didResolveQueryPlan: function(options) {
+    if (options.requestContext.operationName !== 'IntrospectionQuery') {
+      console.log(serializeQueryPlan(options.queryPlan));
+    }
+  },
 });
 
 (async () => {
